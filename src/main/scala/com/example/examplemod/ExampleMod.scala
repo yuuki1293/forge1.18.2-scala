@@ -13,19 +13,23 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
 
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("examplemod") object ExampleMod { // Directly reference a slf4j logger
+@Mod("examplemod")
+object ExampleMod { // Directly reference a slf4j logger
   private val LOGGER = LogUtils.getLogger
 
   // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
   // Event bus for receiving Registry Events)
-  @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD) object RegistryEvents {
-    @SubscribeEvent def onBlocksRegistry(blockRegistryEvent: RegistryEvent.Register[Block]): Unit = { // Register a new block here
+  @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+  object RegistryEvents {
+    @SubscribeEvent
+    def onBlocksRegistry(blockRegistryEvent: RegistryEvent.Register[Block]): Unit = { // Register a new block here
       LOGGER.info("HELLO from Register Block")
     }
   }
 }
 
-@Mod("examplemod") class ExampleMod() { // Register the setup method for modloading
+@Mod("examplemod")
+class ExampleMod() { // Register the setup method for modloading
   FMLJavaModLoadingContext.get.getModEventBus.addListener(this.setup)
   // Register the enqueueIMC method for modloading
   FMLJavaModLoadingContext.get.getModEventBus.addListener(this.enqueueIMC)
@@ -55,7 +59,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
   }
 
   // You can use SubscribeEvent and let the Event Bus discover methods to call
-  @SubscribeEvent def onServerStarting(event: ServerStartingEvent): Unit = { // Do something when the server starts
+  @SubscribeEvent
+  def onServerStarting(event: ServerStartingEvent): Unit = { // Do something when the server starts
     ExampleMod.LOGGER.info("HELLO from server starting")
   }
 }
